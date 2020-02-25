@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "npm run build-watch & npm run start-server",
+    "start-server": "node server.js",
+    "build-watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open --mode development"
+    "start": "echo 'Running server for production - developers, use npm run start:dev for development' && node server.js"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +26,10 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
   }
 }

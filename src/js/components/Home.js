@@ -1,39 +1,21 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 
-class Home extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      value: ""
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    const { value } = event.target;
-    this.setState(() => {
-      return {
-        value
-      };
-    });
-  }
-
-  render() {
-    return (
-      <form>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-      </form>
-    );
-  }
+function Home() {
+  return (
+    <div>
+      <div>
+        <h1>Estimation immobilière gratuite</h1>
+        <h2>Estimer un bien immobilier en 1 minute</h2>
+      </div>
+      <div>
+        <Link className="links" to="/Type">
+          Estimation
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default Home;
-
-const wrapper = document.getElementById("container");
