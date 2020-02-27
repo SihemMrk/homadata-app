@@ -59,7 +59,7 @@ class Type extends React.Component {
       .post("/type", {
         data: data
       })
-      .then(response => console.log("response", response))
+      .then(response => console.log("response here", response.data))
       .catch(err => {
         console.error(err);
       });
@@ -71,10 +71,10 @@ class Type extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="form">
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <h3>Type</h3>
+          <div className="question">
+            <h3>Quel type de bien souhaitez vous estimer ?</h3>
             <input
               type="radio"
               value="appart"
@@ -90,19 +90,20 @@ class Type extends React.Component {
             />
             Maison
           </div>
-          <div>
+          <div className="question">
             <label>
-              <h3>Surface</h3>
+              <h3>Quel est la surface de votre bien ?</h3>
               <input
+                placeholder="m2"
                 type="number"
                 value={this.state.surface}
                 onChange={this.handleInputSurfaceChange}
               />
             </label>
           </div>
-          <div>
+          <div className="question">
             <label>
-              <h3>Piece</h3>
+              <h3>Combien y a-t-il de pièces ?</h3>
               <input
                 type="number"
                 value={this.state.piece}
@@ -110,10 +111,11 @@ class Type extends React.Component {
               ></input>
             </label>
           </div>
-          <div>
+          <div className="question">
             <label>
-              <h3>Prix</h3>
+              <h3>Quel est le prix au m2 ?</h3>
               <input
+                placeholder="€"
                 type="number"
                 value={this.state.prix}
                 onChange={this.handleInputPrixChange}
@@ -121,35 +123,39 @@ class Type extends React.Component {
             </label>
           </div>
 
-          <div>
+          <div className="question">
+            <h3>Quel est l'état général du bien?</h3>
             <input
               type="radio"
               value="bien"
               checked={this.state.etat === "bien"}
               onChange={this.toggleEtat}
             />
-            Bien
+            Refait à neuf
             <input
               type="radio"
               value="moyen"
               checked={this.state.etat === "moyen"}
               onChange={this.toggleEtat}
             />
-            Moyen
+            Bon état
             <input
               type="radio"
               value="mauvais"
               checked={this.state.etat === "mauvais"}
               onChange={this.toggleEtat}
             />
-            Mauvais
+            Nécessite des travaux
           </div>
 
           <div>
             <button type="submit">Estimer</button>
           </div>
         </form>
-        <Link className="links" to="/recap">
+        <Link
+          className="links"
+          to={{ pathname: "/recap", state: { recap: this.state } }}
+        >
           Recap
         </Link>
       </div>

@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
-      <div>
+    <div id="home">
+      <div className="home">
         <h1>Estimation immobilière gratuite</h1>
         <h2>Estimer un bien immobilier en 1 minute</h2>
       </div>
       <div>
-        <Link className="links" to="/Type">
-          Estimation
-        </Link>
+        <button className="buttonHome">
+          <Link className="linkHome" to="/Type">
+            Estimation
+          </Link>
+        </button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import Recap from "./Recap";
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
       <Routes />
     </div>
   );
