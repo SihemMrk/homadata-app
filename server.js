@@ -21,21 +21,28 @@ app.post("/type", function(req, res) {
   const value = datas.value;
 
   var totalPrice = surface * prix;
+
   if (piece <= 2) {
     totalPrice = totalPrice * 1.05;
   } else if (piece === 3 || piece === 4) {
     totalPrice = totalPrice * 1.02;
-  } else if (piece >= 5) {
+  } else {
     totalPrice = totalPrice * 1.01;
-  } else if (value === "maison") {
+  }
+
+  if (value === "maison") {
     totalPrice = totalPrice * 1.03;
   } else if (value === "appart") {
     totalPrice = totalPrice * 1.05;
-  } else if (etat == "mauvais") {
+  }
+
+  if (etat === "mauvais") {
     totalPrice = totalPrice * 0.9;
-  } else if (etat == "bien") {
+  } else if (etat === "bien") {
     totalPrice = totalPrice * 1.1;
   }
-  res.send("test");
+
+  console.log(totalPrice);
+  res.json(totalPrice);
 });
 app.listen(process.env.PORT || 8080);

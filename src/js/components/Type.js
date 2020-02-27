@@ -11,7 +11,8 @@ class Type extends React.Component {
       surface: 0,
       piece: 1,
       prix: 0,
-      etat: ""
+      etat: "",
+      totalPrice: 0
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,10 +60,14 @@ class Type extends React.Component {
       .post("/type", {
         data: data
       })
-      .then(response => console.log("response here", response.data))
+      .then(response => {
+        console.log(response.data);
+        this.setState({ totalPrice: response.data });
+      })
       .catch(err => {
         console.error(err);
       });
+    console.log(this.state);
   }
 
   toggleEtat(e) {
@@ -98,6 +103,7 @@ class Type extends React.Component {
                 type="number"
                 value={this.state.surface}
                 onChange={this.handleInputSurfaceChange}
+                required
               />
             </label>
           </div>
@@ -108,6 +114,7 @@ class Type extends React.Component {
                 type="number"
                 value={this.state.piece}
                 onChange={this.handleInputPieceChange}
+                required
               ></input>
             </label>
           </div>
@@ -119,6 +126,7 @@ class Type extends React.Component {
                 type="number"
                 value={this.state.prix}
                 onChange={this.handleInputPrixChange}
+                required
               ></input>
             </label>
           </div>
@@ -149,15 +157,16 @@ class Type extends React.Component {
           </div>
 
           <div>
-            <button type="submit">Estimer</button>
+            <button className="buttonEstimer" type="submit">
+              <Link
+                className="linkEstimer"
+                to={{ pathname: "/recap", state: { recap: this.state } }}
+              >
+                Estimer
+              </Link>
+            </button>
           </div>
         </form>
-        <Link
-          className="links"
-          to={{ pathname: "/recap", state: { recap: this.state } }}
-        >
-          Recap
-        </Link>
       </div>
     );
   }
