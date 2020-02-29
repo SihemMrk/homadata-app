@@ -27,19 +27,19 @@ app.post("/type", function(req, res) {
   } else if (piece === 3 || piece === 4) {
     totalPrice = totalPrice * 1.02;
   } else {
-    totalPrice = totalPrice * 1.01;
+    totalPrice = totalPrice * 0.99;
   }
 
-  if (value === "maison") {
+  if (value === "Maison") {
     totalPrice = totalPrice * 1.03;
-  } else if (value === "appart") {
+  } else if (value === "Appartement") {
     totalPrice = totalPrice * 1.05;
   }
 
-  if (etat === "mauvais") {
+  if (etat === "Nécessite des travaux") {
     totalPrice = totalPrice * 0.9;
-  } else if (etat === "bien") {
-    totalPrice = totalPrice * 1.1;
+  } else if (etat === "Refait à neuf") {
+    totalPrice = totalPrice * 1.12;
   }
 
   console.log(totalPrice);

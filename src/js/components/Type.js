@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Recap from "./Recap";
 import { Link } from "react-router-dom";
+import Redirect from "react-router-dom/es/Redirect";
 
 class Type extends React.Component {
   constructor(props) {
@@ -67,7 +68,6 @@ class Type extends React.Component {
       .catch(err => {
         console.error(err);
       });
-    console.log(this.state);
   }
 
   toggleEtat(e) {
@@ -75,95 +75,120 @@ class Type extends React.Component {
   }
 
   render() {
+    if (this.state.totalPrice) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/recap",
+            state: { datas: this.state }
+          }}
+        />
+      );
+    }
     return (
       <div id="form">
         <form onSubmit={this.handleSubmit}>
           <div className="question">
             <h3>Quel type de bien souhaitez vous estimer ?</h3>
-            <input
-              type="radio"
-              value="appart"
-              checked={this.state.value === "appart"}
-              onChange={this.handleInputTypeChange}
-            />
-            Appartement
-            <input
-              type="radio"
-              value="maison"
-              checked={this.state.value === "maison"}
-              onChange={this.handleInputTypeChange}
-            />
-            Maison
+            <div className="divTypes">
+              <p className="oneType">
+                <input
+                  id="type_appart"
+                  type="radio"
+                  value="Appartement"
+                  checked={this.state.value === "Appartement"}
+                  onChange={this.handleInputTypeChange}
+                />
+                <label for="type_appart">Appartement</label>
+              </p>
+              <p className="oneType">
+                <input
+                  id="type_maison"
+                  type="radio"
+                  value="Maison"
+                  checked={this.state.value === "Maison"}
+                  onChange={this.handleInputTypeChange}
+                />
+                <label for="type_maison">Maison</label>
+              </p>
+            </div>
           </div>
           <div className="question">
-            <label>
-              <h3>Quel est la surface de votre bien ?</h3>
+            <h3>Quel est la surface de votre bien ?</h3>
+            <p>
               <input
                 placeholder="m2"
                 type="number"
+                min="0"
                 value={this.state.surface}
                 onChange={this.handleInputSurfaceChange}
                 required
               />
-            </label>
+            </p>
           </div>
           <div className="question">
-            <label>
-              <h3>Combien y a-t-il de pièces ?</h3>
+            <h3>Combien y a-t-il de pièces ?</h3>
+            <p>
               <input
                 type="number"
+                min="0"
                 value={this.state.piece}
                 onChange={this.handleInputPieceChange}
                 required
-              ></input>
-            </label>
+              />
+            </p>
           </div>
           <div className="question">
-            <label>
-              <h3>Quel est le prix au m2 ?</h3>
+            <h3>Quel est le prix au m2 ?</h3>
+            <p>
               <input
                 placeholder="€"
+                min="0"
                 type="number"
                 value={this.state.prix}
                 onChange={this.handleInputPrixChange}
                 required
-              ></input>
-            </label>
+              />
+            </p>
           </div>
 
           <div className="question">
             <h3>Quel est l'état général du bien?</h3>
-            <input
-              type="radio"
-              value="bien"
-              checked={this.state.etat === "bien"}
-              onChange={this.toggleEtat}
-            />
-            Refait à neuf
-            <input
-              type="radio"
-              value="moyen"
-              checked={this.state.etat === "moyen"}
-              onChange={this.toggleEtat}
-            />
-            Bon état
-            <input
-              type="radio"
-              value="mauvais"
-              checked={this.state.etat === "mauvais"}
-              onChange={this.toggleEtat}
-            />
-            Nécessite des travaux
+            <p>
+              <input
+                id="etat_bien"
+                type="radio"
+                value="Refait à neuf"
+                checked={this.state.etat === "Refait à neuf"}
+                onChange={this.toggleEtat}
+              />
+              <label for="etat_bien">Refait à neuf</label>
+            </p>
+            <p>
+              <input
+                id="etat_moyen"
+                type="radio"
+                value="Bon état"
+                checked={this.state.etat === "Bon état"}
+                onChange={this.toggleEtat}
+              />
+              <label for="etat_moyen">Bon état</label>
+            </p>
+            <p>
+              <input
+                id="etat_mauvais"
+                type="radio"
+                value="Nécessite des travaux"
+                checked={this.state.etat === "Nécessite des travaux"}
+                onChange={this.toggleEtat}
+              />
+              <label for="etat_mauvais">Nécessite des travaux</label>
+            </p>
           </div>
 
           <div>
             <button className="buttonEstimer" type="submit">
-              <Link
-                className="linkEstimer"
-                to={{ pathname: "/recap", state: { recap: this.state } }}
-              >
-                Estimer
-              </Link>
+              Estimer
             </button>
           </div>
         </form>

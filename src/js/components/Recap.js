@@ -1,40 +1,57 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Recap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { datas: {} };
+    console.log(this.props.location.state);
   }
-  componentDidMount() {
-    const { recap } = this.props.location.state;
-    this.setState({ datas: recap });
-    console.log(this.state);
-  }
+
   render() {
+    var prix = this.props.location.state.datas.totalPrice;
     return (
-      <div>
+      <div id="conclusion">
         <div>
-          <h3>{this.state.datas.value}</h3>
+          <h2>Votre bien immobilier</h2>
         </div>
-        <div>
-          <p>De</p>
-          <h3>{this.state.datas.surface}</h3>
-          <p>m2</p>
+        <div id="recap">
+          <div id="typebien">
+            <p>{this.props.location.state.datas.value}</p>
+          </div>
+          <div id="surface">
+            <p>De</p>
+            <p className="valuerecap">
+              {this.props.location.state.datas.surface}
+            </p>
+            <p>m2</p>
+          </div>
+          <div id="pieces">
+            <p>Avec</p>
+            <p className="valuerecap">
+              {this.props.location.state.datas.piece}
+            </p>
+            <p>pièce(s)</p>
+          </div>
+          <div id="etat">
+            <p>{this.props.location.state.datas.etat}</p>
+          </div>
+          <div id="prixm2">
+            <p>Coûte</p>
+            <p className="valuerecap">{this.props.location.state.datas.prix}</p>
+            <p>/m2</p>
+          </div>
         </div>
-        <div>
-          <p>Avec</p>
-          <h3>{this.state.datas.piece}</h3>
-          <p>pièce(s)</p>
+        <div id="totalEstimation">
+          <h3>Estimer à : </h3>
+          <p> {prix.toFixed(2)} €</p>
         </div>
-        <div>
-          <h3>{this.state.datas.etat}</h3>
+        <div id="nouvelleEstimation">
+          <button>
+            <Link className="linkHome" to="/Type">
+              Nouvelle estimation
+            </Link>
+          </button>
         </div>
-        <div>
-          <p>Coûte</p>
-          <h3>{this.state.datas.prix}</h3>
-          <p>/m2</p>
-        </div>
-        <div>total : {this.state.datas.totalPrice}</div>
       </div>
     );
   }
