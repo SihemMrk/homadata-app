@@ -38,7 +38,7 @@ class Recap extends React.Component {
           <div id="prixm2">
             <p>Coûte</p>
             <p className="valuerecap">{this.props.location.state.datas.prix}</p>
-            <p>/m2</p>
+            <p>/m²</p>
           </div>
         </div>
         <div id="totalEstimation">

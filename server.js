@@ -11,6 +11,16 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
+app.get("/Type", function(req, res) {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+app.get("/recap", function(req, res) {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+app.get("/Type", function(req, res) {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 app.post("/type", function(req, res) {
   console.log(req.body.data);
   const datas = req.body.data;

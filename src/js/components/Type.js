@@ -36,7 +36,6 @@ class Type extends React.Component {
   }
 
   handleInputPieceChange(event) {
-    console.log("ici piece change");
     this.setState({
       piece: event.target.value
     });
@@ -56,18 +55,28 @@ class Type extends React.Component {
       prix: this.state.prix,
       etat: this.state.etat
     };
-    e.preventDefault();
-    axios
-      .post("/type", {
-        data: data
-      })
-      .then(response => {
-        console.log(response.data);
-        this.setState({ totalPrice: response.data });
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    if (
+      this.state.value &&
+      this.state.surface &&
+      this.state.piece &&
+      this.state.prix &&
+      this.state.etat
+    ) {
+      e.preventDefault();
+      axios
+        .post("/type", {
+          data: data
+        })
+        .then(response => {
+          console.log(response.data);
+          this.setState({ totalPrice: response.data });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      alert("Veuillez remplir tous les champs");
+    }
   }
 
   toggleEtat(e) {
@@ -91,7 +100,7 @@ class Type extends React.Component {
           <div className="question">
             <h3>Quel type de bien souhaitez vous estimer ?</h3>
             <div className="divTypes">
-              <p className="oneType">
+              <label for="type_appart" className="oneType">
                 <input
                   id="type_appart"
                   type="radio"
@@ -99,18 +108,18 @@ class Type extends React.Component {
                   checked={this.state.value === "Appartement"}
                   onChange={this.handleInputTypeChange}
                 />
-                <label for="type_appart">Appartement</label>
-              </p>
-              <p className="oneType">
+                Appartement
+              </label>
+              <label for="Maison" className="oneType">
                 <input
-                  id="type_maison"
+                  id="type_appart"
                   type="radio"
                   value="Maison"
                   checked={this.state.value === "Maison"}
                   onChange={this.handleInputTypeChange}
                 />
-                <label for="type_maison">Maison</label>
-              </p>
+                Maison
+              </label>
             </div>
           </div>
           <div className="question">
@@ -139,7 +148,7 @@ class Type extends React.Component {
             </p>
           </div>
           <div className="question">
-            <h3>Quel est le prix au m2 ?</h3>
+            <h3>Quel est le prix au m² ?</h3>
             <p>
               <input
                 placeholder="€"
@@ -154,7 +163,7 @@ class Type extends React.Component {
 
           <div className="question">
             <h3>Quel est l'état général du bien?</h3>
-            <p>
+            <label for="etat_bien">
               <input
                 id="etat_bien"
                 type="radio"
@@ -162,9 +171,10 @@ class Type extends React.Component {
                 checked={this.state.etat === "Refait à neuf"}
                 onChange={this.toggleEtat}
               />
-              <label for="etat_bien">Refait à neuf</label>
-            </p>
-            <p>
+              Refait à neuf
+            </label>
+
+            <label for="etat_moyen">
               <input
                 id="etat_moyen"
                 type="radio"
@@ -172,9 +182,10 @@ class Type extends React.Component {
                 checked={this.state.etat === "Bon état"}
                 onChange={this.toggleEtat}
               />
-              <label for="etat_moyen">Bon état</label>
-            </p>
-            <p>
+              Bon état
+            </label>
+
+            <label for="etat_mauvais">
               <input
                 id="etat_mauvais"
                 type="radio"
@@ -182,8 +193,8 @@ class Type extends React.Component {
                 checked={this.state.etat === "Nécessite des travaux"}
                 onChange={this.toggleEtat}
               />
-              <label for="etat_mauvais">Nécessite des travaux</label>
-            </p>
+              Nécessite des travaux
+            </label>
           </div>
 
           <div>

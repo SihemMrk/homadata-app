@@ -7,18 +7,6 @@
   text-align: center;
 }
 
-/* html {
-  background-color: blanchedalmond;
-}
-
-body {
-  background-color: blue;
-}
-
-#container {
-  background-color: blueviolet;
-} */
-
 #container,
 #app,
 html,
@@ -26,7 +14,7 @@ body {
   height: 100%;
 }
 #home {
-  background-image: url(ville.jpg);
+  background-image: url(paris--home.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -35,6 +23,10 @@ body {
   opacity: 0.8;
 }
 
+.home h1,
+.home h2 {
+  color: white;
+}
 .home h2 {
   margin-top: 40px;
 }
@@ -208,5 +200,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #totalEstimation p {
-  font-size: 40px;
+  color: rgba(85, 85, 85, 0.39);
+  font-size: 50px;
 }
